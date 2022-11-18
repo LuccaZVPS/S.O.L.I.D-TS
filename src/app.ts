@@ -1,22 +1,22 @@
-import express,{Router, urlencoded} from 'express'
+import express,{ urlencoded} from 'express'
+import allRoutes from './Routes'
 class App{
     app
 constructor(){
     this.app = express()
-    this.middlewares
+    this.middlewares()
     this.routes()
+}
+middlewares(){
+    this.app.use(express.urlencoded({extended:true}))
+    this.app.use(express.json())
 }
 
     routes(){
-        this.app.get("/", (req,res) => {
-            res.send("test")
-        })
+        this.app.use(allRoutes)
         
     }
-    middlewares(){
-        this.app.use(urlencoded({extended:true}))
-        this.app.use(express.json())
-    }
+  
 
 }
 export default new App().app
